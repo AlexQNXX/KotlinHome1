@@ -3,7 +3,7 @@
 Многострочный комментарий
     /* Это вложенный комментарий */
  */
-
+package testKotlin1
 const val DEBUG = true //это как final в java - константа времени компиляции
 
 fun main(args:Array<String>)
@@ -12,12 +12,15 @@ fun main(args:Array<String>)
 
     val name = "Dima"  //константа времени выполнения
         // (но с точки зрения kotlin это почти тоже что const, это переменная которую нельзя модифицировать)
-
     val name1 : String = "Vasya" //явное указание типа
     val name2 = "Alex"
-
     var lastname = "Ivanov"
     lastname = "Rusakov"
+
+    var testStr:String? = "Test"
+
+    testStr = null
+    println("Тестовая строка ${testStr.plus(" 1")}")
 
     println ("Hello, world!")
 
@@ -26,7 +29,7 @@ fun main(args:Array<String>)
     age = null
 
     println(" age length: " + age?.length)
-     //? коворит компилятору что если age не null то выводится длина, если Null то выводится null
+     //? говорит компилятору что если age не null то выводится длина, если Null то выводится null
    // println(" age length: " + age!!.length)  //!! говорит что там точно не null , будет Null pointer exception
 
     //    ветвления
@@ -53,6 +56,17 @@ fun main(args:Array<String>)
        //в switch (java) можно проверить только одно значение
 
     }
+
+    var pressure=800
+
+    val pressureStatus = when
+    {
+        pressure <710 -> "Низкое"
+        pressure <740 -> "Среднее"
+        pressure <790 -> "Высокое"
+        else -> "Сверхвысокое"
+    }
+    println("Давление ${pressureStatus}")
 
     //проверка и приведенеи типов
     //Int, String, Long наслдеуют от Any
