@@ -3,8 +3,16 @@
 Многострочный комментарий
     /* Это вложенный комментарий */
  */
+
 package testKotlin1
 const val DEBUG = true //это как final в java - константа времени компиляции
+
+// x автоматически преобразовывается в String справа от `||`
+fun test(x1:Any)
+{
+if (x1 !is String || x1.length == 0) return
+}
+
 
 fun main(args:Array<String>)
 {
@@ -92,6 +100,14 @@ fun main(args:Array<String>)
     //safe cast (безопасное) - тут не надо обрабатывать исключения
     val z : String? = y as? String
     println ("z = "+z)
+
+    val n1:Any=5.6
+    val n2: Int? = n1 as? Int
+    println("n2 = "+n2);
+
+
+
+
 
         //строковые шаблоны
     val firstName = "Masha"
