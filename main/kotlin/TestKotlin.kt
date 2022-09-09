@@ -3,14 +3,16 @@
 Многострочный комментарий
     /* Это вложенный комментарий */
  */
-
 package testKotlin1
+
+import Color
+import Rectangle
+
 const val DEBUG = true //это как final в java - константа времени компиляции
 
-// x автоматически преобразовывается в String справа от `||`
-fun test(x1:Any)
+fun readChar()
 {
-if (x1 !is String || x1.length == 0) return
+    TODO("Сделать позже")
 }
 
 
@@ -88,26 +90,26 @@ fun main(args:Array<String>)
         //внутри этого блока уже можно применять все методы как к переменной типа String
         //причем можно уже не приводить к типу String в этом блоке
         println("String len is: "+ obj.length)
-        println("String len is: ${obj.length}")
+        println("String len is: ${obj.length+1}")
     }
 
     //операторы приведения
 
     //unsafe cast (не безопасное)
-    val y = 12
-   // val x:String = y as String //unsafe cast
+    val y =2_000_000_000
+    // val x:String = y as String //unsafe cast
 
     //safe cast (безопасное) - тут не надо обрабатывать исключения
-    val z : String? = y as? String
-    println ("z = "+z)
+    val z : Int? = y as? Int
+    println ("z (Int) = "+z)
+    //!!! но это не преобразование типов, а только приведение
+    // (нельзя значение находящееся в диапазоне Int привести к Long
+    //если значение лежит в диапазоне Long то оно легко приведется в Long
 
-    val n1:Any=5.6
-    val n2: Int? = n1 as? Int
-    println("n2 = "+n2);
-
-
-
-
+    //преобразование типов
+    val y1 ="1"
+    val zx:Any? = y1.toFloat()
+    println("zx (float) = "+zx)
 
         //строковые шаблоны
     val firstName = "Masha"
@@ -186,6 +188,15 @@ println(printAny("123"))
 
 println(fizzbuzz(3))
 
+    var rect = Rectangle(15, 15)
+    println("rectangle isSquare = ${rect.isSquare} , ${rect.depth}") //rectangle isSquare = true , 14
+    rect = Rectangle(14, 15)
+   rect.color=Color.BLUE
+ //    val orange = Color.ORANGE
+//    orange.rgb()
+    println("rectangle isSquare = ${rect.isSquare} , ${rect.color}, ${rect.color.rgb()}") //rectangle isSquare = false , 20
+
+    println(greeting("Alex", "Lee"))
 
 } //end main
 
@@ -193,6 +204,7 @@ println(fizzbuzz(3))
 //вариант 1
 fun greeting(firstName:String, lastName: String):String //возвращает String
 {
+    require (!firstName.isBlank()) {"Нужно указать имя"} //require порождает исключение IllegalArgumentException
     return "Hello, $firstName $lastName"
 }
 
